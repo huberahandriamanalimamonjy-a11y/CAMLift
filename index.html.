@@ -1,516 +1,680 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#090909">
-<title>CAMLift | Premium Video</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080808">
+<title>CAMLift — Video Platform</title>
 
 <style>
 :root {
-  --bg:#090909;
-  --card:#171717;
-  --gold:#d6ad62;
-  --white:#f5f5f5;
-  --muted:#999;
+  --bg: #080808;
+  --panel: #111111;
+  --panel2: #181818;
+  --gold: #d6ad52;
+  --gold2: #f5d98b;
+  --white: #f5f5f5;
+  --muted: #999999;
+  --line: #292929;
 }
-* {
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
-  background:var(--bg);
-  color:var(--white);
-  font-family:Arial,sans-serif;
+  margin: 0;
+  background: var(--bg) !important;
+  color: var(--white) !important;
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
 }
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+
 header {
-  height:70px;
-  padding:0 5%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  background:#101010;
-  border-bottom:1px solid #292929;
-  position:sticky;
-  top:0;
-  z-index:10;
+  background: #0b0b0b;
+  border-bottom: 1px solid #292319;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+.nav {
+  max-width: 1250px;
+  margin: auto;
+  padding: 16px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
 }
 .logo {
-  color:var(--gold);
-  font-size:26px;
-  font-weight:900;
-  letter-spacing:1px;
+  font-size: 27px;
+  font-weight: 900;
+  letter-spacing: -1px;
 }
-nav {
-  display:flex;
-  gap:22px;
+.logo span { color: var(--gold); }
+.navlinks {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  color: #cccccc;
+  font-size: 14px;
 }
-nav a {
-  color:#ddd;
-  text-decoration:none;
-  font-size:14px;
+.navlinks a:hover { color: var(--gold); }
+.gold-btn {
+  border: 0;
+  border-radius: 7px;
+  padding: 11px 17px;
+  background: linear-gradient(135deg, #f2d58b, #b98931);
+  color: #17110a;
+  font-weight: 800;
 }
-nav a:hover {color:var(--gold)}
-button {
-  cursor:pointer;
+.gold-btn:hover { filter: brightness(1.12); }
+.menu-btn {
+  display: none;
+  background: transparent;
+  color: white;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 8px 12px;
 }
-.login {
-  background:var(--gold);
-  color:#111;
-  border:0;
-  border-radius:6px;
-  padding:11px 17px;
-  font-weight:bold;
-}
+
+main { max-width: 1250px; margin: auto; padding: 0 22px 60px; }
+
 .hero {
-  padding:65px 7%;
-  background:linear-gradient(110deg,#292014,#0b0b0b 75%);
+  margin-top: 28px;
+  min-height: 310px;
+  padding: 55px 48px;
+  border: 1px solid #4b3b20;
+  border-radius: 16px;
+  background:
+    radial-gradient(ellipse at 80% 20%, #5b431b66, transparent 45%),
+    linear-gradient(120deg, #19150e, #101010 65%, #211a0d);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
 }
-.hero small {
-  color:var(--gold);
-  letter-spacing:3px;
-  font-weight:bold;
+.hero-content { max-width: 650px; }
+.eyebrow {
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 11px;
+  font-weight: bold;
 }
 .hero h1 {
-  font-size:clamp(38px,7vw,65px);
-  margin:20px 0;
+  font-size: clamp(36px, 6vw, 62px);
+  line-height: 1.04;
+  margin: 17px 0;
+  letter-spacing: -2px;
 }
-.hero h1 span {color:var(--gold)}
-.hero p {
-  color:#bbb;
-  line-height:1.8;
-  max-width:550px;
+.hero h1 span { color: var(--gold); }
+.hero p { color: #bcbcbc; line-height: 1.7; max-width: 520px; }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 25px; }
+.outline-btn {
+  background: transparent;
+  color: white;
+  border: 1px solid #6a5733;
+  border-radius: 7px;
+  padding: 11px 17px;
 }
-.gold-btn {
-  margin-top:24px;
-  padding:14px 22px;
-  background:var(--gold);
-  color:#111;
-  border:0;
-  border-radius:5px;
-  font-weight:bold;
+.outline-btn:hover { background: #2a2113; }
+
+.searchbar {
+  margin: 30px 0 24px;
+  display: flex;
+  gap: 10px;
 }
-.container {
-  padding:35px 6%;
+.searchbar input {
+  width: 100%;
+  background: #141414;
+  color: white;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 14px 16px;
+  outline: none;
 }
-.search {
-  display:flex;
-  gap:10px;
-  margin-bottom:30px;
+.searchbar input:focus { border-color: var(--gold); }
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin: 30px 0 17px;
 }
-.search input {
-  flex:1;
-  min-width:0;
-  padding:14px;
-  background:#191919;
-  border:1px solid #333;
-  border-radius:7px;
-  color:white;
+.section-head h2 { margin: 0; font-size: 23px; }
+.section-head h2 span { color: var(--gold); }
+.section-head small { color: var(--muted); }
+
+.filters {
+  display: flex;
+  gap: 9px;
+  overflow-x: auto;
+  padding: 3px 0 15px;
 }
-.search button {
-  padding:0 18px;
-  background:var(--gold);
-  border:0;
-  border-radius:7px;
+.filter {
+  flex-shrink: 0;
+  border: 1px solid #333;
+  background: #151515;
+  color: #ccc;
+  border-radius: 30px;
+  padding: 9px 16px;
 }
-h2 {
-  margin-bottom:20px;
-  font-size:23px;
+.filter.active, .filter:hover {
+  color: #17110a;
+  background: var(--gold);
+  border-color: var(--gold);
+  font-weight: bold;
 }
-.categories {
-  display:flex;
-  gap:10px;
-  overflow-x:auto;
-  padding-bottom:25px;
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
 }
-.category {
-  padding:11px 18px;
-  border:1px solid #383838;
-  background:#191919;
-  color:white;
-  border-radius:25px;
-  white-space:nowrap;
+.video-card {
+  min-width: 0;
+  background: var(--panel);
+  border: 1px solid #242424;
+  border-radius: 11px;
+  overflow: hidden;
+  transition: transform .2s, border-color .2s;
 }
-.category.active {
-  background:var(--gold);
-  color:#111;
+.video-card:hover {
+  transform: translateY(-4px);
+  border-color: #80632d;
 }
-.grid {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:22px;
+.thumb {
+  height: 185px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, #3b2914, #111 65%);
 }
-.video {
-  background:var(--card);
-  border:1px solid #292929;
-  border-radius:10px;
-  overflow:hidden;
-  transition:.2s;
+.thumb::before {
+  content: "";
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background: #d6ad5222;
+  filter: blur(12px);
 }
-.video:hover {
-  transform:translateY(-4px);
+.thumb.music { background: linear-gradient(135deg, #321d3f, #101018); }
+.thumb.travel { background: linear-gradient(135deg, #123d3b, #101a1a); }
+.thumb.film { background: linear-gradient(135deg, #45221c, #151010); }
+.thumb.art { background: linear-gradient(135deg, #39311a, #18140d); }
+.thumb.tech { background: linear-gradient(135deg, #172c45, #0c111a); }
+.thumb-icon { position: relative; font-size: 55px; opacity: .9; }
+.play-circle {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #d6ad52e8;
+  color: #17110a;
+  font-size: 19px;
+  padding-left: 3px;
+  box-shadow: 0 4px 25px #0008;
 }
-.thumbnail {
-  height:175px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:linear-gradient(135deg,#42351f,#151515);
-  position:relative;
-}
-.play {
-  width:55px;
-  height:55px;
-  border-radius:50%;
-  background:var(--gold);
-  color:#111;
-  display:grid;
-  place-items:center;
-  font-size:22px;
+.duration {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  background: #000b;
+  border-radius: 4px;
+  padding: 5px 7px;
+  font-size: 11px;
 }
 .tag {
-  position:absolute;
-  top:12px;
-  left:12px;
-  background:var(--gold);
-  color:#111;
-  font-size:11px;
-  padding:6px 10px;
-  border-radius:4px;
-  font-weight:bold;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: var(--gold);
+  color: #17110a;
+  padding: 5px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 900;
 }
-.info {
-  padding:15px;
+.tag.free { background: #202820; color: #a8e4a8; }
+.video-info { padding: 14px; }
+.video-info h3 { margin: 0 0 9px; font-size: 16px; line-height: 1.4; }
+.video-info p { color: var(--muted); font-size: 12px; margin: 0; }
+.video-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 14px;
+  color: #aaa;
+  font-size: 11px;
 }
-.info h3 {
-  font-size:16px;
-  margin-bottom:9px;
-}
-.info p {
-  font-size:12px;
-  color:var(--muted);
-}
-.info button {
-  margin-top:13px;
-  width:100%;
-  padding:11px;
-  border:1px solid var(--gold);
-  background:transparent;
-  color:var(--gold);
-  border-radius:5px;
-}
-.info button:hover {
-  background:var(--gold);
-  color:#111;
-}
-section {scroll-margin-top:85px}
-.creator {
-  display:flex;
-  gap:15px;
-  align-items:center;
-  background:var(--card);
-  border:1px solid #292929;
-  border-radius:9px;
-  padding:20px;
-}
-.avatar {
-  width:50px;
-  height:50px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  background:#382d19;
-  color:var(--gold);
-  font-weight:bold;
-}
-.creator p {
-  color:var(--muted);
-  font-size:13px;
-  margin-top:5px;
-}
-.form {
-  background:var(--card);
-  padding:22px;
-  border-radius:10px;
-  border:1px solid #333;
-  max-width:600px;
-}
-.form input,.form select {
-  width:100%;
-  padding:13px;
-  margin:9px 0 15px;
-  border:1px solid #444;
-  background:#101010;
-  color:white;
-  border-radius:5px;
-}
-.form label {
-  font-size:13px;
-  color:#ccc;
-}
-.form button {
-  width:100%;
-  padding:13px;
-  background:var(--gold);
-  border:0;
-  border-radius:5px;
-  font-weight:bold;
-}
-.notice {
-  color:#aaa;
-  font-size:12px;
-  line-height:1.6;
-  margin-top:12px;
-}
-footer {
-  text-align:center;
-  padding:35px 15px;
-  border-top:1px solid #292929;
-  color:#888;
-  font-size:13px;
-  margin-top:50px;
-}
-footer span {color:var(--gold)}
+.price { color: var(--gold2); font-weight: bold; }
+
 .empty {
-  color:#aaa;
-  padding:25px 0;
-  display:none;
+  display: none;
+  text-align: center;
+  padding: 40px 10px;
+  color: var(--muted);
+  border: 1px dashed #444;
+  border-radius: 10px;
 }
-@media(max-width:750px) {
-  nav {display:none}
-  .grid {grid-template-columns:repeat(2,1fr);gap:12px}
-  .thumbnail {height:130px}
-  .container {padding:25px 4%}
+
+.premium {
+  margin-top: 55px;
+  padding: 35px;
+  border: 1px solid #6b5125;
+  border-radius: 13px;
+  background: linear-gradient(110deg, #211a0d, #12100c);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
 }
-@media(max-width:420px) {
-  .grid {grid-template-columns:1fr}
-  .thumbnail {height:190px}
-  .hero {padding:48px 6%}
+.premium h2 { margin: 0 0 10px; color: var(--gold2); }
+.premium p { color: #bbb; line-height: 1.6; margin: 0; }
+
+.publish {
+  margin-top: 55px;
+  padding: 28px;
+  background: #111;
+  border: 1px solid #303030;
+  border-radius: 12px;
+}
+.publish h2 { margin-top: 0; }
+.publish p { color: var(--muted); line-height: 1.6; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.field { display: flex; flex-direction: column; gap: 7px; }
+.field.full { grid-column: 1 / -1; }
+.field label { color: #ccc; font-size: 13px; }
+.field input, .field select, .field textarea {
+  width: 100%;
+  background: #080808;
+  color: white;
+  border: 1px solid #373737;
+  border-radius: 7px;
+  padding: 12px;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: 1px solid var(--gold);
+  border-color: var(--gold);
+}
+.field textarea { min-height: 85px; resize: vertical; }
+.notice {
+  font-size: 12px;
+  color: #d9bd7d !important;
+  margin-top: 14px;
+}
+#formMessage { color: var(--gold2); font-size: 13px; }
+
+footer {
+  margin-top: 55px;
+  border-top: 1px solid #292929;
+  padding: 25px 10px;
+  color: #777;
+  text-align: center;
+  font-size: 12px;
+}
+footer strong { color: var(--gold); }
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: #000e;
+  padding: 18px;
+  align-items: center;
+  justify-content: center;
+}
+.modal.open { display: flex; }
+.modal-box {
+  width: min(620px, 100%);
+  max-height: 90vh;
+  overflow: auto;
+  background: #151515;
+  border: 1px solid #70572b;
+  border-radius: 13px;
+  padding: 22px;
+  position: relative;
+}
+.close {
+  position: absolute;
+  right: 14px;
+  top: 12px;
+  border: 0;
+  background: transparent;
+  color: white;
+  font-size: 27px;
+}
+.modal-box h2 { color: var(--gold2); padding-right: 30px; }
+.modal-box p { color: #bbb; line-height: 1.6; }
+.modal-box video { width: 100%; max-height: 55vh; background: #000; border-radius: 8px; }
+.modal-placeholder {
+  padding: 55px 15px;
+  text-align: center;
+  background: #080808;
+  border-radius: 8px;
+  color: #aaa;
+}
+
+@media (max-width: 800px) {
+  .video-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .navlinks { gap: 13px; }
+}
+@media (max-width: 560px) {
+  .nav { padding: 13px 15px; }
+  .logo { font-size: 23px; }
+  .navlinks {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    padding: 18px;
+    background: #111;
+    border-bottom: 1px solid #333;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .navlinks.show { display: flex; }
+  .menu-btn { display: block; }
+  .nav > .gold-btn { display: none; }
+  main { padding: 0 14px 40px; }
+  .hero { padding: 35px 22px; min-height: 300px; }
+  .hero h1 { letter-spacing: -1px; }
+  .video-grid { grid-template-columns: 1fr; gap: 15px; }
+  .thumb { height: 200px; }
+  .premium { padding: 24px; flex-direction: column; align-items: flex-start; }
+  .publish { padding: 20px 15px; }
+  .form-grid { grid-template-columns: 1fr; }
+  .field.full { grid-column: auto; }
+  .section-head h2 { font-size: 20px; }
 }
 </style>
 </head>
 
 <body>
-
 <header>
-  <div class="logo">CAMLift</div>
-  <nav>
-    <a href="#home">Accueil</a>
-    <a href="#videos">Vidéos</a>
-    <a href="#creators">Créateurs</a>
-    <a href="#publish">Publier</a>
+  <nav class="nav">
+    <a class="logo" href="#home">CAM<span>LIFT</span></a>
+
+    <div class="navlinks" id="navLinks">
+      <a href="#home">Accueil</a>
+      <a href="#videos">Vidéos</a>
+      <a href="#premium">Premium</a>
+      <a href="#publish">Publier</a>
+    </div>
+
+    <button class="gold-btn" onclick="goToPublish()">Devenir créateur</button>
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
   </nav>
-  <button class="login" onclick="alert('Les comptes seront disponibles dans une prochaine version.')">
-    Connexion
-  </button>
 </header>
 
-<section class="hero" id="home">
-  <small>PREMIUM VIDEO COMMUNITY</small>
-  <h1>Discover a world<br>of <span>creativity.</span></h1>
-  <p>
-    Bienvenue sur CAMLift. Découvrez des vidéos,
-    explorez des univers créatifs et retrouvez
-    vos créateurs préférés.
-  </p>
-  <button class="gold-btn" onclick="document.getElementById('videos').scrollIntoView({behavior:'smooth'})">
-    Explorer les vidéos →
-  </button>
-</section>
-
-<main class="container">
-
-<section id="videos">
-  <div class="search">
-    <input id="searchInput" type="search" placeholder="Rechercher une vidéo...">
-    <button onclick="filterVideos()">🔎</button>
-  </div>
-
-  <h2>Explorer les catégories</h2>
-  <div class="categories">
-    <button class="category active" onclick="setCategory('all',this)">Tout</button>
-    <button class="category" onclick="setCategory('cinema',this)">Cinéma</button>
-    <button class="category" onclick="setCategory('music',this)">Musique</button>
-    <button class="category" onclick="setCategory('travel',this)">Voyage</button>
-    <button class="category" onclick="setCategory('art',this)">Art</button>
-    <button class="category" onclick="setCategory('premium',this)">Premium</button>
-  </div>
-
-  <h2>Vidéos populaires</h2>
-  <div class="grid" id="videoGrid">
-
-    <article class="video" data-category="cinema" data-title="cinéma nouvelle vision">
-      <div class="thumbnail">
-        <span class="tag">GRATUIT</span>
-        <div class="play">▶</div>
+<main>
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="eyebrow">Une nouvelle expérience vidéo</div>
+      <h1>Découvrez. Regardez.<br><span>Partagez.</span></h1>
+      <p>
+        Bienvenue sur CAMLift, une plateforme pour découvrir des vidéos,
+        suivre des créateurs et partager votre univers.
+      </p>
+      <div class="hero-actions">
+        <button class="gold-btn" onclick="document.getElementById('videos').scrollIntoView()">Explorer les vidéos</button>
+        <button class="outline-btn" onclick="goToPublish()">Publier une vidéo</button>
       </div>
-      <div class="info">
-        <h3>Nouvelle vision</h3>
-        <p>Créateur : CAM Studio</p>
-        <button onclick="showVideo('Nouvelle vision')">Regarder</button>
-      </div>
-    </article>
-
-    <article class="video" data-category="music" data-title="musique golden night">
-      <div class="thumbnail">
-        <span class="tag">GRATUIT</span>
-        <div class="play">▶</div>
-      </div>
-      <div class="info">
-        <h3>Golden Night</h3>
-        <p>Créateur : Music Lab</p>
-        <button onclick="showVideo('Golden Night')">Regarder</button>
-      </div>
-    </article>
-
-    <article class="video" data-category="travel" data-title="voyage aventure">
-      <div class="thumbnail">
-        <span class="tag">GRATUIT</span>
-        <div class="play">▶</div>
-      </div>
-      <div class="info">
-        <h3>Adventure World</h3>
-        <p>Créateur : Travel Pro</p>
-        <button onclick="showVideo('Adventure World')">Regarder</button>
-      </div>
-    </article>
-
-    <article class="video" data-category="art" data-title="art creation">
-      <div class="thumbnail">
-        <span class="tag">GRATUIT</span>
-        <div class="play">▶</div>
-      </div>
-      <div class="info">
-        <h3>Creative Art</h3>
-        <p>Créateur : Art House</p>
-        <button onclick="showVideo('Creative Art')">Regarder</button>
-      </div>
-    </article>
-
-    <article class="video" data-category="premium" data-title="premium cinematic collection">
-      <div class="thumbnail">
-        <span class="tag">PREMIUM</span>
-        <div class="play">🔒</div>
-      </div>
-      <div class="info">
-        <h3>Cinematic Collection</h3>
-        <p>Créateur : CAM Studio</p>
-        <button onclick="showPremium()">Découvrir l'offre</button>
-      </div>
-    </article>
-
-    <article class="video" data-category="premium" data-title="premium exclusive studio">
-      <div class="thumbnail">
-        <span class="tag">PREMIUM</span>
-        <div class="play">🔒</div>
-      </div>
-      <div class="info">
-        <h3>Exclusive Studio</h3>
-        <p>Créateur : Creator One</p>
-        <button onclick="showPremium()">Découvrir l'offre</button>
-      </div>
-    </article>
-
-  </div>
-  <p class="empty" id="empty">Aucun résultat trouvé.</p>
-</section>
-
-<section id="creators" style="margin-top:55px">
-  <h2>Nos créateurs</h2>
-  <div class="creator">
-    <div class="avatar">CS</div>
-    <div>
-      <h3>CAM Studio</h3>
-      <p>Créateur de vidéos • Profil de démonstration</p>
     </div>
+  </section>
+
+  <div class="searchbar">
+    <input id="searchInput" type="search" placeholder="Rechercher une vidéo ou un créateur..." oninput="filterVideos()">
   </div>
-</section>
 
-<section id="publish" style="margin-top:55px">
-  <h2>Espace créateur</h2>
-  <div class="form">
-    <label>Titre de la vidéo</label>
-    <input id="videoTitle" placeholder="Nom de votre vidéo">
+  <section id="videos">
+    <div class="section-head">
+      <h2>À découvrir <span>✦</span></h2>
+      <small id="videoCount">6 vidéos</small>
+    </div>
 
-    <label>Catégorie</label>
-    <select id="videoCategory">
-      <option value="cinema">Cinéma</option>
-      <option value="music">Musique</option>
-      <option value="travel">Voyage</option>
-      <option value="art">Art</option>
-    </select>
+    <div class="filters">
+      <button class="filter active" data-category="all" onclick="setCategory('all',this)">Tout</button>
+      <button class="filter" data-category="film" onclick="setCategory('film',this)">Cinéma</button>
+      <button class="filter" data-category="music" onclick="setCategory('music',this)">Musique</button>
+      <button class="filter" data-category="travel" onclick="setCategory('travel',this)">Voyage</button>
+      <button class="filter" data-category="art" onclick="setCategory('art',this)">Art</button>
+      <button class="filter" data-category="tech" onclick="setCategory('tech',this)">Technologie</button>
+      <button class="filter" data-category="premium" onclick="setCategory('premium',this)">Premium</button>
+    </div>
 
-    <button onclick="demoPublish()">Prévisualiser la publication</button>
+    <div class="video-grid" id="videoGrid">
+      <article class="video-card" data-category="film" data-title="Les lumières de la ville">
+        <div class="thumb film">
+          <span class="thumb-icon">🎬</span><span class="play-circle">▶</span>
+          <span class="tag free">GRATUIT</span><span class="duration">08:24</span>
+        </div>
+        <div class="video-info">
+          <h3>Les lumières de la ville</h3>
+          <p>Par CAM Studio</p>
+          <div class="video-meta"><span>▶ 1,2 k vues</span><span>Gratuit</span></div>
+        </div>
+      </article>
 
-    <p class="notice">
-      Ceci est une démonstration locale. Les publications réelles
-      nécessitent un compte, un serveur, un stockage sécurisé
-      et une modération avant mise en ligne.
-    </p>
-  </div>
-</section>
+      <article class="video-card" data-category="music" data-title="Session musicale nocturne">
+        <div class="thumb music">
+          <span class="thumb-icon">🎧</span><span class="play-circle">▶</span>
+          <span class="tag">PREMIUM</span><span class="duration">12:10</span>
+        </div>
+        <div class="video-info">
+          <h3>Session musicale nocturne</h3>
+          <p>Par Gold Music</p>
+          <div class="video-meta"><span>▶ 850 vues</span><span class="price">2 000 Ar</span></div>
+        </div>
+      </article>
 
+      <article class="video-card" data-category="travel" data-title="Voyage au cœur de Madagascar">
+        <div class="thumb travel">
+          <span class="thumb-icon">🌴</span><span class="play-circle">▶</span>
+          <span class="tag free">GRATUIT</span><span class="duration">15:32</span>
+        </div>
+        <div class="video-info">
+          <h3>Voyage au cœur de Madagascar</h3>
+          <p>Par Mada Explorer</p>
+          <div class="video-meta"><span>▶ 3,4 k vues</span><span>Gratuit</span></div>
+        </div>
+      </article>
+
+      <article class="video-card" data-category="art" data-title="L'art de créer">
+        <div class="thumb art">
+          <span class="thumb-icon">🎨</span><span class="play-circle">▶</span>
+          <span class="tag free">GRATUIT</span><span class="duration">06:45</span>
+        </div>
+        <div class="video-info">
+          <h3>L'art de créer</h3>
+          <p>Par Atelier  Mada</p>
+          <div class="video-meta"><span>▶ 640 vues</span><span>Gratuit</span></div>
+        </div>
+      </article>
+
+      <article class="video-card" data-category="tech" data-title="Le futur du numérique">
+        <div class="thumb tech">
+          <span class="thumb-icon">💻</span><span class="play-circle">▶</span>
+          <span class="tag">PREMIUM</span><span class="duration">18:05</span>
+        </div>
+        <div class="video-info">
+          <h3>Le futur du numérique</h3>
+          <p>Par Tech Vision</p>
+          <div class="video-meta"><span>▶ 2,1 k vues</span><span class="price">3 000 Ar</span></div>
+        </div>
+      </article>
+
+      <article class="video-card" data-category="film" data-title="Derrière la caméra">
+        <div class="thumb film">
+          <span class="thumb-icon">📽️</span><span class="play-circle">▶</span>
+          <span class="tag free">GRATUIT</span><span class="duration">10:16</span>
+        </div>
+        <div class="video-info">
+          <h3>Derrière la caméra</h3>
+          <p>Par CAM Studio</p>
+          <div class="video-meta"><span>▶ 970 vues</span><span>Gratuit</span></div>
+        </div>
+      </article>
+    </div>
+    <div class="empty" id="emptyMessage">Aucune vidéo trouvée. Essaie une autre recherche.</div>
+  </section>
+
+  <section class="premium" id="premium">
+    <div>
+      <h2>✦ L'expérience CAMLift Premium</h2>
+      <p>Découvre des contenus exclusifs proposés par les créateurs.<br>
+      Les vidéos payantes seront disponibles après la mise en place du système de paiement.</p>
+    </div>
+    <button class="gold-btn" onclick="openPremium()">Découvrir Premium</button>
+  </section>
+
+  <section class="publish" id="publish">
+    <h2>Publier une vidéo</h2>
+    <p>Prépare une vidéo et découvre son aperçu sur CAMLift.</p>
+
+    <form id="publishForm">
+      <div class="form-grid">
+        <div class="field">
+          <label for="videoTitle">Titre de la vidéo</label>
+          <input id="videoTitle" type="text" maxlength="70" placeholder="Ex : Mon premier film" required>
+        </div>
+
+        <div class="field">
+          <label for="creatorName">Nom du créateur</label>
+          <input id="creatorName" type="text" maxlength="40" placeholder="Ton nom ou pseudo" required>
+        </div>
+
+        <div class="field">
+          <label for="videoCategory">Catégorie</label>
+          <select id="videoCategory">
+            <option value="film">Cinéma</option>
+            <option value="music">Musique</option>
+            <option value="travel">Voyage</option>
+            <option value="art">Art</option>
+            <option value="tech">Technologie</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="videoType">Type de vidéo</label>
+          <select id="videoType">
+            <option value="free">Gratuite</option>
+            <option value="premium">Premium (démo)</option>
+          </select>
+        </div>
+
+        <div class="field full">
+          <label for="videoFile">Choisir une vidéo sur ton téléphone</label>
+          <input id="videoFile" type="file" accept="video/*">
+        </div>
+
+        <div class="field full">
+          <label for="videoDescription">Description</label>
+          <textarea id="videoDescription" maxlength="300" placeholder="Présente ta vidéo..."></textarea>
+        </div>
+
+        <div class="field full">
+          <button class="gold-btn" type="submit">Créer un aperçu</button>
+        </div>
+      </div>
+    </form>
+
+    <p id="formMessage"></p>
+    <p class="notice">Démo : l'aperçu est visible dans ce navigateur uniquement. La publication permanente nécessite un serveur et un stockage vidéo.</p>
+  </section>
 </main>
 
 <footer>
-  <div class="logo">CAMLift</div>
-  <p>Premium Video Community</p>
-  <p style="margin-top:12px">© 2026 CAMLift. Tous droits réservés.</p>
-  <p style="margin-top:8px"><span>Créativité • Communauté • Excellence</span></p>
+  <strong>CAMLift</strong> — Découvre ton prochain univers vidéo.<br><br>
+  © 2026 CAMLift. Tous droits réservés.
 </footer>
 
-<script>
-let currentCategory = "all";
+<div class="modal" id="videoModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box">
+    <button class="close" onclick="closeModal()" aria-label="Fermer">×</button>
+    <h2 id="modalTitle">Vidéo CAMLift</h2>
+    <div id="modalContent" class="modal-placeholder">
+      <div style="font-size:42px">▶</div>
+      <p>Cette vidéo est un exemple de présentation.</p>
+    </div>
+    <p id="modalDescription"></p>
+  </div>
+</div>
 
-function setCategory(category,button) {
-  currentCategory = category;
-  document.querySelectorAll(".category").forEach(b => b.classList.remove("active"));
+<script>
+let activeCategory = "all";
+let localVideoUrl = null;
+
+function toggleMenu() {
+  document.getElementById("navLinks").classList.toggle("show");
+}
+
+function goToPublish() {
+  document.getElementById("publish").scrollIntoView({ behavior: "smooth" });
+  document.getElementById("navLinks").classList.remove("show");
+}
+
+function setCategory(category, button) {
+  activeCategory = category;
+  document.querySelectorAll(".filter").forEach(item => item.classList.remove("active"));
   button.classList.add("active");
   filterVideos();
 }
 
 function filterVideos() {
-  const query = document.getElementById("searchInput").value.toLowerCase();
+  const search = document.getElementById("searchInput").value.toLowerCase().trim();
+  const cards = document.querySelectorAll(".video-card");
   let visible = 0;
 
-  document.querySelectorAll(".video").forEach(card => {
+  cards.forEach(card => {
+    const category = card.dataset.category;
+    const title = (card.dataset.title + " " + card.innerText).toLowerCase();
+    const matchesSearch = title.includes(search);
     const matchesCategory =
-      currentCategory === "all" ||
-      card.dataset.category === currentCategory;
+      activeCategory === "all" ||
+      (activeCategory === "premium"
+        ? card.querySelector(".tag")?.textContent.includes("PREMIUM")
+        : category === activeCategory);
 
-    const matchesSearch =
-      card.dataset.title.includes(query);
-
-    card.style.display = matchesCategory && matchesSearch ? "" : "none";
-    if(matchesCategory && matchesSearch) visible++;
+    const show = matchesSearch && matchesCategory;
+    card.style.display = show ? "" : "none";
+    if (show) visible++;
   });
 
-  document.getElementById("empty").style.display = visible ? "none" : "block";
+  document.getElementById("videoCount").textContent = visible + " vidéo(s)";
+  document.getElementById("emptyMessage").style.display = visible ? "none" : "block";
 }
 
-document.getElementById("searchInput").addEventListener("input",filterVideos);
+function openModal(title, description, videoUrl) {
+  document.getElementById("modalTitle").textContent = title;
+  document.getElementById("modalDescription").textContent = description || "";
 
-function showVideo(title) {
-  alert("Vidéo de démonstration : " + title +
-  "\nLe lecteur réel sera connecté au serveur dans une prochaine version.");
-}
+  const content = document.getElementById("modalContent");
+  content.innerHTML = "";
 
-function showPremium() {
-  alert("Contenu Premium.\nLe système de paiement sera intégré côté serveur.");
-}
-
-function demoPublish() {
-  const title = document.getElementById("videoTitle").value.trim();
-  if(!title) {
-    alert("Veuillez saisir un titre.");
-    return;
+  if (videoUrl) {
+    const video = document.createElement("video");
+    video.src = videoUrl;
+    video.controls = true;
+    video.autoplay = true;
+    content.className = "";
+    content.appendChild(video);
+  } else {
+    content.className = "modal-placeholder";
+    content.innerHTML = "<div style='font-size:42px'>▶</div><p>Cette carte est une démonstration visuelle.</p><p>La lecture en ligne sera activée lorsque les vidéos seront hébergées sur un serveur.</p>";
   }
-  alert("Prévisualisation : " + title +
-  "\nPublication réelle non activée.");
-}
-</script>
 
-</body>
-</html>
+  document.getElementById("videoModal").classList.add("open");
+}
+
+function closeModal() {
+  const modal = document.getElementById("videoModal");
+  modal.class
